@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "minimal/centos7"
+  config.vm.box_version = "7.0"
+  
+  # forward access to port 8080 on host to port 80 of our VM
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # we don't really need USB support
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--usb", "off"]
+    vb.customize ["modifyvm", :id, "--usbehci", "off"]
+  end
+
+  # install docker
+  config.vm.provision "docker" do |d|
+  end
+end
