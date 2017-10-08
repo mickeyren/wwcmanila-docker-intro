@@ -1,15 +1,15 @@
 # start off with a small linux distro
-FROM alpine:3.6 
+FROM alpine:3.6
 # update and upgrade our package manager
-RUN apk update && apk upgrade
+RUN apk upgrade
 # install webserver
-RUN apk add nginx 
+RUN apk add --update nginx
 # install PHP and the CGI server that’ll communicate between the web server and PHP
-RUN apk add php7 php7-fpm
+RUN apk add --update php7 php7-fpm
 # clean up
 RUN rm -rf /var/cache/apk/*
 
-# necessary directories
+# necessary directories when nginx and php servers are ran they create files here
 RUN mkdir /run/nginx
 RUN mkdir /run/php
 
