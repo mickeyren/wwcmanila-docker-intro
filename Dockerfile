@@ -9,6 +9,12 @@ RUN apk add --update php7 php7-fpm
 # clean up
 RUN rm -rf /var/cache/apk/*
 
+# install sources needed for compiling PHP modules
+RUN apk add --update php7-dev
+
+# install the PHP memcached module
+RUN apk add --update php7-memcached
+
 # necessary directories when nginx and php servers are ran they create files here
 RUN mkdir /run/nginx
 RUN mkdir /run/php
